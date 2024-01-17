@@ -5,7 +5,7 @@ const Layout = ({children}: PropsWithChildren) => {
   return (
     <div className="flex h-[calc(100vh-56px)]">
       {/* sidebar */}
-      <div className="bg-white border-r w-[250px]">
+      <div className="bg-white border-r p-4 w-[250px]">
         <NavigationItems />
       </div>
       <div className="bg-zinc-100 p-4 flex-1">{children}</div>

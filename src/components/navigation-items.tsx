@@ -30,19 +30,23 @@ const links: NavigationLinks[] = [
 const NavigationItems = () => {
   const pathName = usePathname();
   return (
-    <ul className="flex flex-col gap-2">
+    <ul className="flex flex-col h-full">
+      <li className="text-sm font-medium mb-5 text-zinc-400">Dashboard</li>
       {links.map((link) => {
         return (
-          <li key={link.href}>
-            <Link
-              className={`${pathName === link.href ? "text-red-500" : ""}`}
-              href={link.href}
-            >
-              {link.name}
-            </Link>
-          </li>
+          <Link
+            key={link.href}
+            className={`${
+              pathName === link.href ? "text-indigo-600 bg-zinc-100" : ""
+            } px-4 py-1 rounded-full`}
+            href={link.href}
+          >
+            <li>{link.name}</li>
+          </Link>
         );
       })}
+
+      <li className="mt-auto">picker here</li>
     </ul>
   );
 };

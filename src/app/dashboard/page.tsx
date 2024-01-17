@@ -1,19 +1,18 @@
 "use client";
 
+import {Header} from "@/components/dashboard-headers";
 import axiosBackend from "@/utils/axios";
 import {useQuery} from "@tanstack/react-query";
 import {Loader2} from "lucide-react";
 import React from "react";
-
-type Response = {
-  message: string;
-};
+import {Transaction, columns} from "./columns";
+import {DataTable} from "./data-table";
 
 const Page = () => {
-  const {isLoading, data, error} = useQuery<Response>({
-    queryKey: ["getHello"],
+  const {isLoading, data, error} = useQuery<Transaction[]>({
+    queryKey: ["transactions"],
     queryFn: async () => {
-      const response = await axiosBackend.get<Response>("/", {
+      const response = await axiosBackend.get<Transaction[]>("/", {
         responseType: "json",
       });
 
@@ -21,17 +20,25 @@ const Page = () => {
     },
   });
 
-  if (error) return <div>An error ocurred</div>;
-
-  if (isLoading)
-    return (
-      <div className="flex gap-2">
-        <p>Loading</p>
-        <Loader2 className="animate-spin" />
-      </div>
-    );
-
-  return <div>{JSON.stringify(data)}</div>;
+  return (
+    <div>
+      <Header
+        title="Recent Transactions"
+        buttonTitle="Add account"
+        description="Your most recent transactions"
+        action={() => {
+          console.log("Hey");
+        }}
+      />
+      <DataTable
+        columns={columns}
+        data={data ? data : []}
+        isLoading={isLoading}
+        className="bg-white"
+        error={error}
+      />
+    </div>
+  );
 };
 
 export default Page;
