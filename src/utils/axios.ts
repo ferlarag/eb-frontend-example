@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosBackend = axios.create({
-  baseURL: "http://eb-backend-example-dev.us-west-2.elasticbeanstalk.com/api",
+  baseURL: "https://www.wallet-wise.cloud/api",
 });
 
 export default axiosBackend;
